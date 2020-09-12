@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block title %}
+{% endblock title %}
+
+{% load static %}
+
+{% block content %}
+    <h1>Hello world</h1>
+    <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/jquery-3.5.1.slim.min.js' %}"></script>
+    <script src="{% static 'js/popper.min.js' %} "></script>
+{% endblock content %}

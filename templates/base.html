@@ -1,0 +1,33 @@
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library {% block title %}{% endblock title %}</title>
+    <link rel="stylesheet" href=" {% static 'bootstrap/css/bootstrap.min.css' %}">
+    {% block style %}
+    {% endblock style %}
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <a class="navbar-brand ml-5" href="{% url 'home:index' %}">Library</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse mr-5" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-lg-auto text-center">
+                <li class="nav-item active">
+                    <a class="nav-link text-capitalize" href="#">Test</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    {% block content %}
+    {% endblock content %}
+    <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/jquery-3.5.1.slim.min.js' %}"></script>
+    <script src="{% static 'js/popper.min.js' %} "></script>
+</body>
+</html>
