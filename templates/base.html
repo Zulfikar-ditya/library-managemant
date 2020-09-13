@@ -1,5 +1,6 @@
 {% load static %}
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,61 +9,70 @@
     {% block style %}
     {% endblock style %}
 </head>
+
 <body>
     {% if request.user.is_authenticated %}
-                <nav class="navbar navbar-expand-lg navbar-dark bg-primary text-capitalize">
-    <div class="container">
-        
-        <a class="navbar-brand" href="#"><h2>Library</h2></a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-      
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav ml-lg-auto">
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                member
-              </a>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="#">Add member</a>
-                <a class="dropdown-item" href="#">member list</a>
-                <a href="#" class="dropdown-item">Search Member</a>
-              </div>
-            </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Book
-              </a>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="#">Add member</a>
-                <a class="dropdown-item" href="#">book list</a>
-                <a href="#" class="dropdown-item">Search book</a>
-              </div>
-            </li>
-            
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                borrowing
-              </a>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="#">Add borrowing</a>
-                <a class="dropdown-item" href="#">list borrowing</a>
-                <a href="#" class="dropdown-item">Search borrowing</a>
-                <a href="#" class="dropdown-item">Book Lost</a>
-                <a href="#" class="dropdown-item">Return</a>
-              </div>
-            </li>
-            <li class="nav-item active text-dark">
-                <a href="{% url 'logout' %}" class="btn btn-outline-danger text-white">logout</a>
-            </li>
-          </ul>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary text-capitalize">
+        <div class="container">
+
+            <a class="navbar-brand" href="#">
+                <h2>Library</h2>
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ml-lg-auto">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            member
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="#">Add member</a>
+                            <a class="dropdown-item" href="#">member list</a>
+                            <a href="#" class="dropdown-item">Search Member</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Book
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="#">Add member</a>
+                            <a class="dropdown-item" href="#">book list</a>
+                            <a href="#" class="dropdown-item">Search book</a>
+                        </div>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            borrowing
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="#">Add borrowing</a>
+                            <a class="dropdown-item" href="#">list borrowing</a>
+                            <a href="#" class="dropdown-item">Search borrowing</a>
+                            <a href="#" class="dropdown-item">Book Lost</a>
+                            <a href="#" class="dropdown-item">Return</a>
+                        </div>
+                    </li>
+                    <li class="nav-item active text-dark">
+                        <a href="{% url 'logout' %}" class="btn btn-outline-danger text-white">logout</a>
+                    </li>
+                </ul>
+            </div>
         </div>
-    </div>
-</nav>
+    </nav>
     {% else %}
-        <nav class="navbar navbar-expand-lg navbar-dark bg-primary navbar-fixed-top">
-        <a class="navbar-brand ml-5" href="{% url 'home:index' %}"><h2>Library</h2></a>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary navbar-fixed-top">
+        <a class="navbar-brand ml-5" href="{% url 'home:index' %}">
+            <h2>Library</h2>
+        </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -83,4 +93,5 @@
     <script src="{% static 'js/jquery-3.5.1.slim.min.js' %}"></script>
     <script src="{% static 'js/popper.min.js' %} "></script>
 </body>
+
 </html>
