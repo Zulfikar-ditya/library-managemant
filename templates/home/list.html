@@ -1,0 +1,101 @@
+{% extends 'base.html' %}
+
+{% block title %}
+| List {{ page }}
+{% endblock title %}
+
+{% load static %}
+
+{% block content %}
+<div class="container my-3 text-capitalize">
+    <h2 class="mb-3">List {{page}}s</h2>
+    <div class="row justify-content-right">
+        <div class="col">
+            <form action="" method="post">
+                <div class="form-group">
+                    <input type="search" name="id" id="" placeholder="Member Id" required>
+                    <input type="submit" value="Search" class="btn-sm btn-outline-success">
+                </div>
+            </form>
+            <form action="" method="post">
+                <div class="form-group">
+                    <input type="search" name="nama" id="" placeholder="Member Name" required>
+                    <input type="submit" value="Search" class="btn-sm btn-outline-success">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="container my-4 text-capitalize">
+    <table class="table table-hover">
+        <thead class="thead-dark">
+            <th scope="col">ID</th>
+            <th scope="col">date in</th>
+            <th scope="col">Nama</th>
+            <th scope="col">Address</th>
+            <th scope="col">Email</th>
+            <th scope="col">date born</th>
+            <th scope="col">status</th>
+        </thead>
+        <tbody>
+            {% for i in data %}
+            <tr>
+                <th scope="row">{{i.id}}</th>
+                <td>{{i.date_in}}</td>
+                <td>{{i.name}}</td>
+                <td>{{i.address}}</td>
+                <td class="">{{i.email}}</td>
+                <td>{{i.date_born}}</td>
+                {% if i.status is True %}
+                <td class="text-success text-center">
+                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-check-square-fill"
+                        fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd"
+                            d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm10.03 4.97a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
+                    </svg>
+                </td>
+                {% else %}
+                <td class="text-danger text-center">
+                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-x-square-fill" fill="currentColor"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd"
+                            d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm3.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z" />
+                    </svg>
+                </td>
+                {% endif %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col text-center">
+            <span> Page {{ data.number }} of {{ data.paginator.num_pages }}.</span>
+            <nav aria-label="Page navigation example">
+                <ul class="pagination d-flex flew-wrap justify-content-center">
+                    {% if data.has_previous %}
+                    <li class="page-item">
+                        <a href="?page=1" class="page-link">&laquo; first</a>
+                    </li>
+                    <li class="page-item">
+                        <a href="?page={{ data.previous_page_number }}" class="page-link">previous</a>
+                    </li>
+                    {% endif %}
+                    {% if data.has_next %}
+                    <li class="page-item">
+                        <a href="?page={{ data.next_page_number }}" class="page-link">next</a>
+                    </li>
+                    <li class="page-item">
+                        <a href="?page={{ data.paginator.num_pages }}" class="page-link">last &raquo;</a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </nav>
+        </div>
+    </div>
+</div>
+<script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+<script src="{% static 'js/jquery-3.5.1.slim.min.js' %}"></script>
+<script src="{% static 'js/popper.min.js' %} "></script>
+{% endblock content %}

@@ -31,9 +31,8 @@
                             member
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="#">Add member</a>
-                            <a class="dropdown-item" href="#">member list</a>
-                            <a href="#" class="dropdown-item">Search Member</a>
+                            <a class="dropdown-item" href="{% url 'home:add-member' %}">Add member</a>
+                            <a class="dropdown-item" href="{% url 'home:member-list' %}">member list</a>
                         </div>
                     </li>
                     <li class="nav-item dropdown">
