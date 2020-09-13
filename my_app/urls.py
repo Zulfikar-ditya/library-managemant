@@ -6,4 +6,5 @@ app_name = 'home'
 
 urlpatterns = [
     path('', views.index, name='index'),
+    path('add-member/', views.add_member, name='add-member'),
 ]

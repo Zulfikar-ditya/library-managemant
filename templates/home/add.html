@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block title %}
+| Add {{ page }}
+{% endblock title %}
+
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-5">
+            <div class="card border-primary text-capitalize">
+                <div class="card-header bg-primary text-center">
+                    <h2>Add {{ Page }}</h2> 
+                </div>
+                <div class="card-body border-primary">
+                    <form action="" method="post">
+                        {% csrf_token %}
+                        {{ form|crispy }}
+                    </div>
+                    <div class="card-footer border-primary d-flex justify-content-around bg-transparent">
+                        <a href="" class="btn btn-outline-warning">cancel</a>
+                        <input type="submit" value="Save" class="btn btn-outline-success" name="add">    
+                        <input type="submit" value="save and add another" class="btn btn-outline-primary" name="add_another">    
+                        <a href="" class="btn btn-outline-danger">reset</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+<script src="{% static 'js/jquery-3.5.1.slim.min.js' %}"></script>
+<script src="{% static 'js/popper.min.js' %} "></script>
+{% endblock content %}
