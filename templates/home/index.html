@@ -6,7 +6,37 @@
 {% load static %}
 
 {% block content %}
-    <h1>Hello world</h1>
+    {% if request.user.is_authenticated %}
+    <div class="container my-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-5">
+                <ul class="list-group text-capitalize text-center">
+                    <li class="list-group-item bg-primary text-white">
+                        <h3>welcome back</h3>
+                    </li>
+                    <li class="list-group-item">
+                        <h5>you are login as {{ request.user }}</h5>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    {% else %}
+    <div class="container my-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-5">
+                <ul class="list-group text-capitalize text-center">
+                    <li class="list-group-item bg-primary text-white">
+                        <h3>please login to do somethings</h3>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="{% url 'login' %}" class="btn btn-outline-success">login</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    {% endif %}
     <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
     <script src="{% static 'js/jquery-3.5.1.slim.min.js' %}"></script>
     <script src="{% static 'js/popper.min.js' %} "></script>
