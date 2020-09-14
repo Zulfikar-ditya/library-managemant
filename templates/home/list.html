@@ -8,16 +8,18 @@
 
 {% block content %}
 <div class="container my-3 text-capitalize">
-    <h2 class="mb-3">List {{page}}s</h2>
+    <h2 class="mb-3">List {{page}}</h2>
     <div class="row justify-content-right">
         <div class="col">
             <form action="" method="post">
+                {% csrf_token %}
                 <div class="form-group">
-                    <input type="search" name="id" id="" placeholder="Member Id" required>
+                    <input type="search" name="id" id="" placeholder="Member I" required>
                     <input type="submit" value="Search" class="btn-sm btn-outline-success">
                 </div>
             </form>
             <form action="" method="post">
+                {% csrf_token %}
                 <div class="form-group">
                     <input type="search" name="nama" id="" placeholder="Member Name" required>
                     <input type="submit" value="Search" class="btn-sm btn-outline-success">
