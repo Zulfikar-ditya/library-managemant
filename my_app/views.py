@@ -21,8 +21,8 @@ def add_member(request):
                 instance = form.save(commit=False)
                 instance.user = request.user
                 instance.save()
-                if request.POST['add']:
-                    return HttpResponseRedirect(reverse('home:list-member'))
+                if 'add' in request.POST:
+                    return HttpResponseRedirect(reverse('home:member-list'))
                 else:
                     return HttpResponseRedirect(reverse('home:add-member'))
                     
@@ -39,7 +39,7 @@ def add_member(request):
 def member_list(request):
     if request.user.is_authenticated:
         page = 'Member'
-        data = Member.objects.all()
+        data = Member.objects.all().order_by('id')
         paginator = Paginator(data, 100)
         pageNum = request.GET.get('page')
         dataresult = paginator.get_page(pageNum)
