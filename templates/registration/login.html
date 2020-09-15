@@ -3,6 +3,11 @@
 {% block title %}
 | Login
 {% endblock title %}
+
+{% load static %}
+{% load crispy_forms_tags %}
+
+
 {% block content %}
 {% if request.user.is_authenticated %}
 <div class="container py-5">
@@ -30,7 +35,7 @@
                 <div class="card-body">
                     <form action="" method="post" class="form">
                         {% csrf_token%}
-                        {{ form.as_p }}
+                        {{ form|crispy }}
                         <input type="submit" value="Login" class="btn btn-primary">
                     </form>
                 </div>

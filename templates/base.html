@@ -15,7 +15,7 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary text-capitalize">
         <div class="container">
 
-            <a class="navbar-brand" href="#">
+            <a class="navbar-brand" href="{% url 'home:index' %}">
                 <h2>Library</h2>
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -41,9 +41,8 @@
                             Book
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="#">Add member</a>
-                            <a class="dropdown-item" href="#">book list</a>
-                            <a href="#" class="dropdown-item">Search book</a>
+                            <a class="dropdown-item" href="{% url 'home:add-book' %}">Add book</a>
+                            <a class="dropdown-item" href="{% url 'home:book-list' %}">book list</a>
                         </div>
                     </li>
 

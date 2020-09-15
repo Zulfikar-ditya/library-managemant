@@ -38,7 +38,6 @@ class Categorie(models.Model):
 
 class Book(models.Model):
     dateAdd = models.DateField(auto_now_add=True)
-    name = models.CharField(max_length=50)
     author = models.CharField(max_length=50)
     title = models.CharField(max_length=50)
     denda = models.IntegerField(default=10000)
@@ -46,7 +45,7 @@ class Book(models.Model):
     status = models.BooleanField(default=True)
     rating = models.ForeignKey(Rating, on_delete=models.CASCADE,)
     categorie = models.ForeignKey(Categorie, on_delete=models.CASCADE,)
-    user_add = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
 
 
     class Meta:

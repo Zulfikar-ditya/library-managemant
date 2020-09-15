@@ -14,14 +14,14 @@
             <form action="" method="post">
                 {% csrf_token %}
                 <div class="form-group">
-                    <input type="search" name="id" id="" placeholder="Member Id" required>
+                    <input type="search" name="id" id="" placeholder="Book Id" required>
                     <input type="submit" value="Search" class="btn-sm btn-outline-success">
                 </div>
             </form>
             <form action="" method="post">
                 {% csrf_token %}
                 <div class="form-group">
-                    <input type="search" name="nama" id="" placeholder="Member Name" required>
+                    <input type="search" name="nama" id="" placeholder="Book Title" required>
                     <input type="submit" value="Search" class="btn-sm btn-outline-success">
                 </div>
             </form>
@@ -32,22 +32,26 @@
     <table class="table table-hover">
         <thead class="thead-dark">
             <th scope="col">ID</th>
-            <th scope="col">date in</th>
-            <th scope="col">Nama</th>
-            <th scope="col">Address</th>
-            <th scope="col">Email</th>
-            <th scope="col">date born</th>
+            <th scope="col">date add</th>
+            <th scope="col">author</th>
+            <th scope="col">title</th>
+            <th scope="col">denda</th>
+            <th scope="col">denda hilang</th>
+            <th scope="col">rating</th>
+            <th scope="col">categorie</th>
             <th scope="col">status</th>
         </thead>
         <tbody>
             {% for i in data %}
             <tr>
                 <th scope="row">{{i.id}}</th>
-                <td>{{i.date_in}}</td>
-                <td>{{i.name}}</td>
-                <td>{{i.address}}</td>
-                <td class="">{{i.email}}</td>
-                <td>{{i.date_born}}</td>
+                <td>{{i.dateAdd}}</td>
+                <td>{{i.author}}</td>
+                <td>{{i.title}}</td>
+                <td class="">{{i.denda}}</td>
+                <td>{{i.denda_hilang}}</td>
+                <td>{{i.rating}}</td>
+                <td>{{i.categorie}}</td>
                 {% if i.status is True %}
                 <td class="text-success text-center">
                     <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-check-square-fill"
@@ -97,8 +101,8 @@
             </nav>
         </div>
     </div>
-{% endif %}
 </div>
+{% endif %}
 <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
 <script src="{% static 'js/jquery-3.5.1.slim.min.js' %}"></script>
 <script src="{% static 'js/popper.min.js' %} "></script>

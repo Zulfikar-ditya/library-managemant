@@ -18,19 +18,17 @@ class CategorieAdmin(admin.ModelAdmin):
 class BookAdmin(admin.ModelAdmin):
     list_display = [
         'dateAdd',
-        'name',
         'author',
         'status',
         'rating',
         'categorie',
-        'user_add',
+        'user',
     ]
     list_filter = (
         ('status', admin.BooleanFieldListFilter),
         'author',
-        'name',
         ('categorie', admin.RelatedOnlyFieldListFilter),
-        ('user_add', admin.RelatedOnlyFieldListFilter),
+        ('user', admin.RelatedOnlyFieldListFilter),
         
     )
 

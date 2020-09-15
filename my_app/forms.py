@@ -20,3 +20,17 @@ class MemberForm(forms.ModelForm):
         widgets = {
             'date_born': DateInput(),
         }
+
+
+class BookForm(forms.ModelForm):
+    
+    class Meta:
+        model = Book
+        fields = (
+            'author',
+            'title',
+            'denda',
+            'denda_hilang',
+            'rating',
+            'categorie',
+        )
