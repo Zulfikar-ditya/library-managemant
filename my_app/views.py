@@ -161,6 +161,24 @@ def book_list(request):
         return HttpResponseRedirect(reverse('login'))
 
 
+def book_borrow_by_member(request, member_id):
+    if request.user.is_authenticated:
+        try:
+            getMember = Member.objects.get(pk=member_id)
+        except (KeyError, Member.DoesNotExist):
+            return HttpResponseRedirect(reverse('home:not_found'))
+        getBookList = Peminjaman.objects.filter(member=getMember, status_pengembalian=False)
+        paginator = Paginator(getBookList, 100)
+        pageNum = request.GET.get('page')
+        dataresult = paginator.get_page(pageNum)
+        return render(request, 'home/book-borrow-by-member.html', {
+            'getMember': getMember,
+            'data': dataresult,
+        })
+    else:
+        return HttpResponseRedirect(reverse('login'))
+
+
 def search_by_name(request, query, model):
     if request.user.is_authenticated:
         page = f'Search result for name: {query}'

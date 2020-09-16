@@ -1,54 +1,37 @@
 {% extends 'base.html' %}
 
 {% block title %}
-| List {{ page }}
+| List Borrowing - {{ getMember.name }}
 {% endblock title %}
 
 {% load static %}
 
 {% block content %}
-<div class="container my-3 text-capitalize">
-    <h2 class="mb-3">List {{page}}</h2>
-    <div class="row justify-content-right">
-        <div class="col">
-            <form action="" method="post">
-                {% csrf_token %}
-                <div class="form-group">
-                    <input type="search" name="id" id="" placeholder="Member Id" required>
-                    <input type="submit" value="Search" class="btn-sm btn-outline-success">
-                </div>
-            </form>
-            <form action="" method="post">
-                {% csrf_token %}
-                <div class="form-group">
-                    <input type="search" name="nama" id="" placeholder="Member Name" required>
-                    <input type="submit" value="Search" class="btn-sm btn-outline-success">
-                </div>
-            </form>
-        </div>
-    </div>
+<div class="container my-5 text-capitalize">
+    <h4>Member Name: {{getMember.name}}</h4>
 </div>
-<div class="container my-4 text-capitalize">
+<div class="container my-5 text-capitalize">
     <table class="table table-hover">
         <thead class="thead-dark">
-            <th scope="col">ID</th>
-            <th scope="col">date in</th>
-            <th scope="col">Nama</th>
-            <th scope="col">Address</th>
-            <th scope="col">Email</th>
-            <th scope="col">date born</th>
-            <th scope="col">status</th>
+            <th scope="col">Id</th>
+            <th scope="col">Member</th>
+            <th scope="col">Book</th>
+            <th scope="col">Date must back</th>
+            <th scope="col">status denda</th>
+            <th scope="col">User</th>
         </thead>
         <tbody>
             {% for i in data %}
+            {% if i.status_denda is True%}
+            <tr class="bg-danger text-white">
+                {% else %}
             <tr>
+                {% endif %}
                 <th scope="row">{{i.id}}</th>
-                <td>{{i.date_in}}</td>
-                <td><a href="../user-book-borrow/{{i.id}}/" class="text-info">{{i.name}}</a></td>
-                <td>{{i.address}}</td>
-                <td class="">{{i.email}}</td>
-                <td>{{i.date_born}}</td>
-                {% if i.status is True %}
+                <td>{{i.member}}</td>
+                <td>{{i.book}}</td>
+                <td>{{i.date_must_back}}</td>
+                {% if i.status_denda is True %}
                 <td class="text-success text-center">
                     <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-check-square-fill"
                         fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -65,12 +48,12 @@
                     </svg>
                 </td>
                 {% endif %}
+                <td>{{i.user}}</td>
             </tr>
             {% endfor %}
         </tbody>
     </table>
 </div>
-{% if with_paginator is True %}
 <div class="container">
     <div class="row">
         <div class="col text-center">
@@ -97,7 +80,6 @@
             </nav>
         </div>
     </div>
-{% endif %}
 </div>
 <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
 <script src="{% static 'js/jquery-3.5.1.slim.min.js' %}"></script>

@@ -18,6 +18,7 @@ urlpatterns = [
     path('add-borrow/', views.add_borrow, name='add-borrow'),
     path('add-borrow/<int:member_id>/', views.add_borrow2, name='add-borrow2'),
     path('borrow-list/', views.borrow_list, name='borrow-list'),
+    path('user-book-borrow/<int:member_id>/', views.book_borrow_by_member, name='user-book-borrow'),
 
     # error success
     path('404/', views.not_found, name='not_found'),
