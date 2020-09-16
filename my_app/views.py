@@ -3,8 +3,14 @@ from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.core.paginator import Paginator
 
+import datetime
+
 from .models import Rating, Categorie, Book, Member, Peminjaman
 from .forms import MemberForm, BookForm
+
+
+today = datetime.date.today()
+back = datetime.timedelta(days=7)
 
 
 def index(request):
@@ -39,6 +45,73 @@ def add(request, pagename, modelForm):
     else:
         return HttpResponseRedirect(reverse('login'))
 
+
+def add_borrow2(request, member_id):
+    if request.user.is_authenticated:
+        message = None
+        try:
+            getMember = Member.objects.get(pk=member_id)
+        except (KeyError, Member.DoesNotExist):
+            return HttpResponseRedirect(reverse('home:not_found'))
+        if request.method == 'POST':
+            try: 
+                getBook = Book.objects.get(pk=request.POST['bookid'])
+            except (KeyError, Book.DoesNotExist):
+                return HttpResponseRedirect(reverse('home:not_found'))
+            if getBook.status_dipinjam is True:
+                message = 'this book already borrowed by another user, you may wrong enter the id of book'
+                return render(request, 'home/peminjaman.html',{
+                    'message': message,
+                })
+            else:
+                message = None
+            getBook.status_dipinjam = True
+            getBook.save()
+            new = Peminjaman.objects.create(
+                member=getMember,
+                book=getBook,
+                date_must_back=today + back,
+                user=request.user,
+            )
+            new.save()
+            if 'add' in request.POST:
+                return HttpResponseRedirect(reverse('home:borrow_list'))
+            else:
+                return HttpResponseRedirect(f'../../../add-borrow/{getMember.id}/')
+        return render(request, 'home/peminjaman.html',{
+            'getMember': getMember,
+            'message': message,
+        })
+    else:
+        return HttpResponseRedirect(reverse('login'))
+
+
+def add_borrow(request):
+    if request.user.is_authenticated:
+        if request.method == "POST":
+            member = int(request.POST['id'])
+            return HttpResponseRedirect(f'../add-borrow/{member}/')
+        return render(request, 'home/add-peminjaman.html')
+    else:
+        return HttpResponseRedirect(reverse('login'))
+
+
+def borrow_list(request):
+    if request.user.is_authenticated:
+        page = 'Borrow'
+        boorow_object = Peminjaman.objects.filter(status_pengembalian=False).order_by('id')
+        for i in boorow_object:
+            i.denda_check()
+        paginator = Paginator(boorow_object, 100)
+        pageNum = request.GET.get('page')
+        dataresult = paginator.get_page(pageNum)
+        return render(request, 'home/list-borrow.html', {
+            'data': dataresult,
+            'page': page,
+        })
+    else:
+        return HttpResponseRedirect(reverse('login'))
+        
 
 def member_list(request):
     if request.user.is_authenticated:

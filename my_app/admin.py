@@ -20,12 +20,14 @@ class BookAdmin(admin.ModelAdmin):
         'dateAdd',
         'author',
         'status',
+        'status_dipinjam',
         'rating',
         'categorie',
         'user',
     ]
     list_filter = (
         ('status', admin.BooleanFieldListFilter),
+        ('status_dipinjam', admin.BooleanFieldListFilter),
         'author',
         ('categorie', admin.RelatedOnlyFieldListFilter),
         ('user', admin.RelatedOnlyFieldListFilter),

@@ -13,7 +13,7 @@
         <div class="col-lg-5">
             <div class="card border-primary text-capitalize">
                 <div class="card-header bg-primary text-center">
-                    <h2>Add {{ Page }}</h2> 
+                    <h2>Add {{ page }}</h2> 
                 </div>
                 <div class="card-body border-primary">
                     <form action="" method="post">
@@ -22,13 +22,13 @@
                     </div>
                     <div class="card-footer border-primary d-flex justify-content-around bg-transparent">
                         {% if page == 'Member' %}
-                        <a href="{% url 'index:member-list' %}" class="btn btn-outline-warning">cancel</a>
+                        <a href="{% url 'home:member-list' %}" class="btn btn-outline-warning">cancel</a>
                         {% else %}
-                        <a href="{% url 'index:book-list' %}" class="btn btn-outline-warning">cancel</a>
+                        <a href="{% url 'home:book-list' %}" class="btn btn-outline-warning">cancel</a>
                         {% endif %}
                         <input type="submit" value="Save" class="btn btn-outline-success" name="add">    
                         <input type="submit" value="save and add another" class="btn btn-outline-primary" name="add_another">    
-                        <input type="reset" value="Reser" class="btn btn-outline danger">
+                        <input type="reset" value="Reset" class="btn btn-outline-danger">
                     </form>
                 </div>
             </div>

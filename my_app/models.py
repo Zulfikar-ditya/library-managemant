@@ -43,6 +43,7 @@ class Book(models.Model):
     denda = models.IntegerField(default=10000)
     denda_hilang = models.IntegerField(default=50000)
     status = models.BooleanField(default=True)
+    status_dipinjam = models.BooleanField(default=False)
     rating = models.ForeignKey(Rating, on_delete=models.CASCADE,)
     categorie = models.ForeignKey(Categorie, on_delete=models.CASCADE,)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -94,7 +95,7 @@ class Peminjaman(models.Model):
     member = models.ForeignKey(Member, on_delete=models.CASCADE)
     book = models.ForeignKey(Book, on_delete=models.CASCADE)
     date_must_back = models.DateField(auto_created=back_day)
-    date_back_by_member = models.DateField(auto_now_add=True)
+    date_back_by_member = models.DateField(blank=True, null=True)
     status_denda = models.BooleanField(default=False)
     status_pengembalian = models.BooleanField(default=False)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -105,18 +106,17 @@ class Peminjaman(models.Model):
         verbose_name_plural = "Peminjamans"
         ordering = ['-dateAdd']
 
-    def __str__(self):
-        return self.member
-
     def get_absolute_url(self):
         return reverse("Peminjaman_detail", kwargs={"pk": self.pk})
 
     def denda_check(self):
         today = datetime.date.today()
-        if self.date_must_back > today:
+        if self.date_must_back < today:
             self.status_denda = True
             self.save()
-        else: pass
+        else: 
+            self.status_denda = False
+            self.save()
 
     def kembali(self):
         self.status_pengembalian = True

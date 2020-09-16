@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block title %}
+| Add Borrowing
+{% endblock title %}
+
+{% load static %}
+
+{% block content %}
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-5">
+            <div class="card border-primary text-center text-capitalize">
+                <div class="card-header bg-primary">
+                    <h3>Add Borrowing</h3>
+                </div>
+                <div class="card-body">
+                    <form action="" method="post">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="">User ID</label>
+                            <input type="number" name="id" id="">
+                        </div>
+                    </div>
+                    <div class="card-footer bg-transparent border-primary">
+                        <input type="submit" value="Add" class="btn btn-outline-success">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+<script src="{% static 'js/jquery-3.5.1.slim.min.js' %}"></script>
+<script src="{% static 'js/popper.min.js' %} "></script>
+{% endblock content %}
