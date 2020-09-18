@@ -8,6 +8,8 @@
 {% block content %}
 <div class="container my-5 text-capitalize">
     <h2 class="my-5">Book title: {{getBook.title}}</h2>
+    <a href="../../delete/Book/{{getBookid}}/" class="btn btn-outline-danger mb-1">delete</a><br>
+    <a href="../../book-lost/{{getBook.id}}" class="btn btn-outline-warning mb-5">Book Lost</a>
     <table class="table table-hover">
         <thead class="thead-dark">
             <th scope="col">ID</th>

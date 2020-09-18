@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+| Book Lost - {{getBook.title}}
+{% endblock title %}
+
+{% block content %}
+<div class="container my-5 text-capitalize">
+    <h1>Book title: {{getBook.title}}</h1>
+    <h5>book author: {{getBook.author}}</h5>
+    <h5>dend lost: {{getBook.denda_hilang}}</h5>
+    <div class="row justify-content-center">
+        <div class="col-lg-5">
+            <div class="card border-primary text-center">
+                <div class="card-header bg-primary">
+                    <h2>Book Lost</h2>
+                </div>
+                <div class="card-body border-primary">
+                    <form action="" method="post">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <input type="submit" value="Submit" class="btn btn-outline-success">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+<script src="{% static 'js/jquery-3.5.1.slim.min.js' %}"></script>
+<script src="{% static 'js/popper.min.js' %} "></script>
+{% endblock content %}
+

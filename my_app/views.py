@@ -294,6 +294,45 @@ def delete(request, model, id):
     else:
         return HttpResponseRedirect(reverse('login'))
 
+
+def book_lost(request, book_id):
+    if request.user.is_authenticated:
+        try:
+            getBook = Book.objects.get(pk=book_id, status=True)
+        except (KeyError, Book.DoesNotExist):
+            return HttpResponseRedirect(reverse('home:not_found'))
+        try:
+            getPeminjaman = Peminjaman.objects.get(book=getBook.id, status_pengembalian=False)
+        except (KeyError, Peminjaman.DoesNotExist):
+            return HttpResponseRedirect(reverse('home:not_found'))
+        if getBook.status is False:
+            return HttpResponseRedirect(reverse('home:not_found'))
+        if request.method == 'POST':
+            getPeminjaman.status_pengembalian = True
+            getPeminjaman.date_back_by_member = today
+            getBook.status_dipinjam = False
+            getBook.status = False
+            getPeminjaman.save()
+            getBook.save()
+            return HttpResponseRedirect(reverse('home:book-list'))
+        return render(request, 'home/book-lost.html', {
+            'getBook': getBook,
+            'getPeminjaman': getPeminjaman,
+        })
+    else:
+        return HttpResponseRedirect(reverse('login'))
+
+
+def book_lost_input(request):
+    if request.user.is_authenticated:
+        if request.method == 'POST':
+            query = request.POST['id']
+            return HttpResponseRedirect(f'../book-lost/{query}/')
+        return render(request, 'home/book-lost-input.html')
+    else:
+        return HttpResponseRedirect(reverse('login'))
+
+
 def search_by_name(request, query, model):
     if request.user.is_authenticated:
         page = f'Search result for name: {query}'

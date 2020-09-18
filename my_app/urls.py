@@ -34,4 +34,8 @@ urlpatterns = [
 
     # delete
     path('delete/<str:model>/<int:id>/', views.delete, name='delete'),
+
+    # book lost
+    path('book-lost/', views.book_lost_input, name="book=lost-input"),
+    path('book-lost/<int:book_id>/', views.book_lost, name='book-lost'),
 ]
