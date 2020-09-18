@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+| Delete - {{page}} - {{getItem}}
+{% endblock title %}
+
+{% block content %}
+<div class="container my-5 text-capitalize">
+    <h2>Delete Confirm</h2>
+    <p>are you sure want to delete: <span class="text-info">{{getItem}}</span >?</p>
+    <hr>
+    {% if page == 'Member' %}
+    <a href="{% url 'home:member-list' %}" class="btn btn-outline-success">Cancel</a>
+    {% else %}
+    <a href="{% url 'home:book-list' %}" class="btn btn-outline-success">Cancel</a>
+    {% endif %}
+    <form action="" method="post">
+    {% csrf_token %}
+        <input type="submit" value="Delete" class="btn btn-outline-danger mt-5">
+    </form>
+</div>
+{% endblock content %}

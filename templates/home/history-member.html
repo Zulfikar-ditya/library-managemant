@@ -7,7 +7,8 @@
 
 {% block content %}
 <div class="container my-5 text-capitalize">
-    <h2 class="my-5">member name: {{member.name}}</h2>
+    <h2 class="mt-5">member name: {{member.name}}</h2>
+    <a href="../../delete/Member/{{member.id}}/" class="btn btn-outline-danger mb-5">delete</a>
     <table class="table table-hover">
         <thead class="thead-dark">
             <th scope="col">ID</th>

@@ -267,6 +267,33 @@ def history_book(request, book_id):
         return HttpResponseRedirect(reverse('login'))
 
 
+def delete(request, model, id):
+    if request.user.is_authenticated:
+        page = model
+        if model == 'Member':
+            try:
+                getItem = Member.objects.get(pk=id)
+            except (KeyError, Member.DoesNotExist):
+                return HttpResponseRedirect(reverse('home:not_found'))
+        else:
+            try:
+                getItem = Book.objects.get(pk=id)
+            except (KeyError, Book.DoesNotExist):
+                return HttpResponseRedirect(reverse('home:not_found'))
+        if request.method == 'POST':
+            getItem.delete()
+            getItem.save()
+            if model == 'Member':
+                return HttpResponseRedirect(reverse('home:member-list'))
+            else:
+                return HttpResponseRedirect(reverse('home:book-list'))
+        return render(request, 'home/delete-confirm.html', {
+            'page': page,
+            'getItem': getItem,
+        })
+    else:
+        return HttpResponseRedirect(reverse('login'))
+
 def search_by_name(request, query, model):
     if request.user.is_authenticated:
         page = f'Search result for name: {query}'

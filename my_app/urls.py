@@ -31,4 +31,7 @@ urlpatterns = [
     # history
     path('history-member/<int:member_id>/', views.history_member, name='history-member'),
     path('history-book/<int:book_id>/', views.history_book, name='history-book'),
+
+    # delete
+    path('delete/<str:model>/<int:id>/', views.delete, name='delete'),
 ]
