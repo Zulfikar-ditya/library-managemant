@@ -148,7 +148,7 @@ def book_list(request):
                 return search_by_id(request, query, Book)
         page = 'Book'
         with_paginator = True
-        data = Book.objects.all().order_by('id')
+        data = Book.objects.filter(status=True).order_by('id')
         paginator = Paginator(data, 100)
         pageNum = request.GET.get('page')
         dataresult = paginator.get_page(pageNum)

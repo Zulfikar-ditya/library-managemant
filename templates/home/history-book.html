@@ -8,13 +8,14 @@
 {% block content %}
 <div class="container my-5 text-capitalize">
     <h2 class="my-5">Book title: {{getBook.title}}</h2>
-    <a href="../../delete/Book/{{getBookid}}/" class="btn btn-outline-danger mb-1">delete</a><br>
-    <a href="../../book-lost/{{getBook.id}}" class="btn btn-outline-warning mb-5">Book Lost</a>
+    <a href="../../delete/Book/{{getBook.id}}/" class="btn btn-outline-danger mb-1">delete</a><br>
+    <a href="../../book-lost/{{getBook.id}}/" class="btn btn-outline-warning mb-5">Book Lost</a>
     <table class="table table-hover">
         <thead class="thead-dark">
             <th scope="col">ID</th>
             <th scope="col">date</th>
             <th scope="col">book</th>
+            <th scope="col">member</th>
             <th scope="col">date must back</th>
             <th scope="col">date back by user</th>
             <th scope="col">status dend</th>
@@ -30,6 +31,7 @@
                 <th scope="row">{{i.id}}</th>
                 <td>{{i.dateAdd}}</td>
                 <td>{{i.book}}</td>
+                <td>{{i.member}}</td>
                 <td>{{i.date_must_back}}</td>
                 {% if i.date_back_by_member is None %}
                 <td>-</td>
