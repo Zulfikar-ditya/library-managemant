@@ -20,6 +20,10 @@ urlpatterns = [
     path('borrow-list/', views.borrow_list, name='borrow-list'),
     path('user-book-borrow/<int:member_id>/', views.book_borrow_by_member, name='user-book-borrow'),
 
+    # return
+    path('return/', views.return_book_input, name='return-1'),
+    path('return/<int:book_id>/', views.return_book, name='return-2'),
+
     # error success
     path('404/', views.not_found, name='not_found'),
     path('success/', views.success, name='success'),

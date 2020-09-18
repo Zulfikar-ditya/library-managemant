@@ -23,7 +23,11 @@
         </thead>
         <tbody>
             {% for i in data %}
+            {% if i.status_denda is True%}
+            <tr class="bg-danger text-white">
+            {% else %}
             <tr>
+            {% endif %}
                 <th scope="row">{{i.id}}</th>
                 <td>{{i.dateAdd}}</td>
                 <td>{{i.member}}</td>

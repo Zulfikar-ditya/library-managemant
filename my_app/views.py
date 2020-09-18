@@ -75,7 +75,7 @@ def add_borrow2(request, member_id):
             )
             new.save()
             if 'add' in request.POST:
-                return HttpResponseRedirect(reverse('home:borrow_list'))
+                return HttpResponseRedirect(reverse('home:borrow-list'))
             else:
                 return HttpResponseRedirect(f'../../../add-borrow/{getMember.id}/')
         return render(request, 'home/peminjaman.html',{
@@ -168,6 +168,8 @@ def book_borrow_by_member(request, member_id):
         except (KeyError, Member.DoesNotExist):
             return HttpResponseRedirect(reverse('home:not_found'))
         getBookList = Peminjaman.objects.filter(member=getMember, status_pengembalian=False)
+        for i in getBookList:
+            i.denda_check()
         paginator = Paginator(getBookList, 100)
         pageNum = request.GET.get('page')
         dataresult = paginator.get_page(pageNum)
@@ -175,6 +177,52 @@ def book_borrow_by_member(request, member_id):
             'getMember': getMember,
             'data': dataresult,
         })
+    else:
+        return HttpResponseRedirect(reverse('login'))
+
+
+def return_book(request, book_id):
+    if request.user.is_authenticated:
+        message = None
+        try:
+            getBook = Book.objects.get(pk=book_id)
+        except:
+            return HttpResponseRedirect(reverse('home:not_found'))
+        try:
+            getPeminjaman = Peminjaman.objects.get(book=getBook.id, status_pengembalian=False)
+        except: return HttpResponseRedirect(reverse('home:not_found'))
+        if request.method == 'POST':
+            getPeminjaman.status_pengembalian = True
+            getPeminjaman.date_back_by_member = datetime.date.today()
+            getPeminjaman.save()
+            getBook.status_dipinjam = False
+            getBook.save()
+            if 'return' in request.POST:
+                return HttpResponseRedirect(reverse('home:borrow-list'))
+            else:
+                return HttpResponseRedirect(reverse('home:return-1'))
+        if getPeminjaman.status_pengembalian is True:
+            return HttpResponseRedirect(reverse('home:not_found'))
+        getPeminjaman.denda_check()
+        if getPeminjaman.status_denda is True:
+            message = True
+        else:
+            message = False
+        return render(request, 'home/return-display.html', {
+            'getBook': getBook,
+            'getPeminjaman': getPeminjaman,
+            'message': message,
+        })
+    else:
+        return HttpResponseRedirect(reverse('login'))
+
+
+def return_book_input(request):
+    if request.user.is_authenticated:
+        if request.method == 'POST':
+            query = int(request.POST['id'])
+            return HttpResponseRedirect(f'../return/{query}/')
+        return render(request, 'home/return.html')
     else:
         return HttpResponseRedirect(reverse('login'))
 

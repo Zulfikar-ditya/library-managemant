@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+| Return
+{% endblock title %}
+
+{% block content %}
+    <div class="container my-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-5">
+                <div class="card border-primary text-center">
+                    <div class="card-header bg-primary">
+                        <h2>Return Book</h2>
+                    </div>
+                    <div class="card-body">
+                        <form action="" method="post">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <label for="">Book Id</label>
+                                <input type="number" name="id" id="">
+                            </div>
+                        </div>
+                        <div class="card-footer border-primary bg-trnsparent">
+                            <input type="submit" value="Submit" class="btn btn-outline-success" name="add">
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/jquery-3.5.1.slim.min.js' %}"></script>
+    <script src="{% static 'js/popper.min.js' %} "></script>
+{% endblock content %}

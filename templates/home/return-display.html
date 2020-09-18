@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block title %}
+| Return - {{getBook}}
+{% endblock title %}
+
+{% load static %}
+
+{% block content %}
+    <div class="container my-5 text-capitalize">
+        <h3>member Name: {{getPeminjaman.member}}</h3>
+        <hr>
+        {% if message is True %}
+            <h5 class="text-danger">denda: True</h5>
+        {% else %}
+            <h5 class="text-success">denda: false</h5>
+        {% endif %}
+        <h5>Book title: {{getBook.title}}</h5>
+    </div>
+    <div class="container my-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-5">
+                <div class="card border-primary text-center text-capitalize">
+                    <div class="card-header bg-primary">
+                        <h2>Return book</h2>
+                    </div>
+                    <div class="card-body">
+                        <form action="" method="post">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <label for="">return</label><br>
+                                <input type="submit" value="Return This Book" class="btn btn-outline-info" name="return">
+                                <input type="submit" value="Return And Return Another" class="btn btn-outline-success" name="return another">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/jquery-3.5.1.slim.min.js' %}"></script>
+    <script src="{% static 'js/popper.min.js' %} "></script>
+{% endblock content %}
