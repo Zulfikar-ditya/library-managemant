@@ -28,4 +28,7 @@ urlpatterns = [
     path('404/', views.not_found, name='not_found'),
     path('success/', views.success, name='success'),
 
+    # history
+    path('history-member/<int:member_id>/', views.history_member, name='history-member'),
+    path('history-book/<int:book_id>/', views.history_book, name='history-book'),
 ]

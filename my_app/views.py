@@ -227,6 +227,46 @@ def return_book_input(request):
         return HttpResponseRedirect(reverse('login'))
 
 
+def history_member(request, member_id):
+    if request.user.is_authenticated:
+        try:
+            getMember = Member.objects.get(pk=member_id)
+        except (KeyError, Member.DoesNotExist):
+            return HttpResponseRedirect(reverse('home:not_found'))
+        member_peminjaman = Peminjaman.objects.filter(member=getMember.id)
+        for i in member_peminjaman:
+            if i.status_pengembalian is False:
+                i.denda_check()
+            else: pass
+        paginator = Paginator(member_peminjaman, 100)
+        pageNum = request.GET.get('page')
+        dataresult = paginator.get_page(pageNum)
+        return render(request, 'home/history-member.html', {
+            'data': dataresult,
+            'member': getMember,
+        })
+    else:
+        return HttpResponseRedirect(reverse('login'))
+
+
+def history_book(request, book_id):
+    if request.user.is_authenticated:
+        try:
+            getBook = Book.objects.get(pk=book_id)
+        except(KeyError, Book.DoesNotExist):
+            return HttpResponseRedirect(reverse('home:not_found'))
+        getPeminjaman = Peminjaman.objects.filter(book=getBook.id)
+        paginator = Paginator(getPeminjaman, 100)
+        pageNum = request.GET.get('page')
+        dataresult = paginator.get_page(pageNum)
+        return render(request, 'home/history-book.html', {
+            'getBook': getBook,
+            'data': dataresult,
+        })
+    else:
+        return HttpResponseRedirect(reverse('login'))
+
+
 def search_by_name(request, query, model):
     if request.user.is_authenticated:
         page = f'Search result for name: {query}'
